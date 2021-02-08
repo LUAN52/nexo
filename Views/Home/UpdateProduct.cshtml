@@ -1,0 +1,16 @@
+
+@model Product
+
+
+<form asp-action="AddProduct" asp-controller="Home" asp-route-id ="@Model.id">
+    <div>
+        <input type="text" name="productName" value="@Model.Name">
+    </div>
+    <div>
+        <input type="text" name="price" value="@Model.Price">
+    </div>
+
+    <button type="submit">
+        atualizar produto
+    </button>
+</form>

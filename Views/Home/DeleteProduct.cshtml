@@ -1,0 +1,15 @@
+@model Product
+
+
+<form asp-action="DeleteProd" asp-controller="Home" asp-route-id ="@Model.id">
+    <div>
+        <input type="text" name="productName" value="@Model.Name" disabled="disabled">
+    </div>
+    <div>
+        <input type="text" name="price" value="@Model.Price" disabled="disabled">
+    </div>
+
+    <button type="submit">
+        deletar produto
+    </button>
+</form>
