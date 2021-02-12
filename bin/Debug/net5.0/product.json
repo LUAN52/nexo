@@ -1,0 +1,28 @@
+
+    [
+        {
+            "name": "lençol",
+            "available": true,
+            "price": 45.50
+        },
+        {
+            "name": "sofa",
+            "available": true                                              ,
+            "price": 500.00
+        },
+        {
+            "name": "omeleteira",
+            "available": true,
+            "price": 300.50
+        },
+        {
+            "name": "cafeteira",
+            "available": true,
+            "price": 50.50
+        },
+        {
+            "nome": "travisseiro",
+            "tipo": "mesa e banho",
+            "preco": 30.50
+        }
+    ] 

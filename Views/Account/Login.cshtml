@@ -1,21 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-</head>
-<body>
-        <form asp-action="Login" asp-controller="Account">
-            <div>
-                <input type="text" placeholder="nome" name="userName">
-            </div>
-            <div>
-                <input type="text" placeholder="senha" name="password">
-            </div>
-        
-        <button type="submit">logar-se</button>
-        </form>
-</body>
-</html>
+
+@if(!User.Identity.IsAuthenticated)
+{
+
+    <form asp-action="Login" asp-controller="Account" class="form">
+        <div class="form-group">
+            <label for="productName">Nome</label>
+            <input type="text" class="form-control"  placeholder="digite seu email" name="userName">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Senha</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="digite sua senha" name="password">
+        </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+}
+else
+{
+    <a  class="btn btn-primary" asp-action="ProductList" asp-controller="Home">Voltar para lista</a>
+}
+

@@ -1,26 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-</head>
-<body>
-        <form asp-action="Register" asp-controller="Account">
-            <div>
-                <input type="text" placeholder="nome" name="userName">
-            </div>
-
-            <div>
-                <input type="email" placeholder="email" name="email">
-            </div>
-
-            <div>
-                <input type="text" placeholder="senha" name="password">
-            </div>
-            
-        <button type="submit">registrar</button>
-        </form>
-</body>
-</html>
+<form asp-action="Register" asp-controller="Account" class="form">
+    <div class="form-group">
+        <label for="productName">Nome</label>
+        <input type="text" class="form-control"  placeholder="digite seu email" name="name">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Email</label>
+        <input type="email" class="form-control" id="exampleInputPassword1" placeholder="preço" name="email">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Senha</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="preço" name="password">
+    </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

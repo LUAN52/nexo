@@ -12,6 +12,7 @@ using nexo.Models;
 using Microsoft.EntityFrameworkCore;
 using Nexo.data;
 using Microsoft.AspNetCore.Identity;
+using nexo.repository;
 
 namespace nexo
 {
@@ -30,6 +31,8 @@ namespace nexo
             services.AddDbContext<AppDbContext>(opt=>opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllersWithViews();
             services.AddTransient<IReadArchive,ReadArchive>();
+            services.AddTransient<ClientRepository>();
+            services.AddTransient<ProductRepository>();
 
             services.AddIdentity<Client,IdentityRole>(opt=>
             {opt.Password.RequireLowercase =false;

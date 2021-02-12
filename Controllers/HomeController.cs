@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using nexo.Models;
+using nexo.repository;
 using Nexo.data;
 
 namespace nexo.Controllers
@@ -20,17 +21,22 @@ namespace nexo.Controllers
     {
 
         
-        private readonly ILogger<HomeController> _logger;
         private readonly AppDbContext _context;
 
         private readonly UserManager<Client> _userManager;
+        private readonly ClientRepository _rClient;
+        private readonly ProductRepository _rProduct;
 
-        public HomeController(ILogger<HomeController> logger,IReadArchive read, AppDbContext context,UserManager<Client> userManager)
+        public HomeController( ClientRepository rClient ,
+        ProductRepository rProduct,
+         UserManager<Client> userManager,
+         AppDbContext context)
         {
-            _logger = logger;
-           _context = context;
-           _userManager = userManager;
             
+           _userManager = userManager;
+            _rClient = rClient;
+            _rProduct = rProduct;
+            _context=context;
         }
 
         public IActionResult Index()
@@ -47,11 +53,9 @@ namespace nexo.Controllers
         public IActionResult ProductList()
         {   
             var id = _userManager.GetUserId(HttpContext.User);
-            var listaProd = _context.Products
+            var listaProd = _rProduct.GetByIdClient(id);
            
-            .Include(p=>p.Client)
-            .Where(p=>p.Client_id==id)
-            .ToList();
+            
             
             return View(listaProd);
         }
@@ -115,46 +119,33 @@ namespace nexo.Controllers
         }
 
         [HttpPost]
-          public IActionResult DeleteProd(int id)
+          public IActionResult DeleteProd(string id)
         {
-              var prod= _context.Products
-              .Where(p=>p.id==id)
-            .FirstOrDefault();
-
+            var prod= _rProduct.GetById(id);
+                
             if(prod!=null)
             {
-                _context.Products.Remove(prod);
-                _context.SaveChanges();
+                _rProduct.Delete(prod);
             }
-
-           
 
            return RedirectToAction("ProductList","Home");
         }
 
         [HttpPost]
-        public IActionResult UpdateProduct(int id,string productName,string price)
+        public IActionResult UpdateProduct(string productName,string price,int id)
         {
             var idUser = _userManager.GetUserId(HttpContext.User);
 
-            var prod= _context.Products
-           .Include(p=>p.Client)
-           .Where(p=>p.Client_id==idUser)
-           .FirstOrDefault(p=>p.id==id);
-
-            
-
-           var Nprod = prod;
-
+            var prod= _rProduct.GetOneProductByIdClient(id,idUser);
+          
             var priceR = price.Replace(".",",");
             var priceD = double.Parse(priceR);
 
-            Nprod.Name = productName;
-            Nprod.Price = priceD;
+            prod.Name = productName;
+            prod.Price = priceD;
             
-            _context.Entry(prod).State = EntityState.Modified;
-            _context.Update(prod);
-            _context.SaveChanges();
+
+            _rProduct.Update(prod);
 
             return RedirectToAction("ProductList","Home");
 

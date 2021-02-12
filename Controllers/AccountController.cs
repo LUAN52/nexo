@@ -45,7 +45,7 @@ namespace Nexo.Controllers
 
             var client = new Client(userName);
             client.Email = email;
-            client.RegisterDate = DateTime.Now;
+         
 
             var result = await this._user.CreateAsync(client, password);
 
@@ -121,7 +121,7 @@ namespace Nexo.Controllers
 
                 var result = await this._signInManager.PasswordSignInAsync(user, password, false, false);
 
-                if (result.Succeeded)
+                if ((result.Succeeded) || (User.Identity.IsAuthenticated))
                 {
                     return RedirectToAction("ProductList", "Home");
                 }
