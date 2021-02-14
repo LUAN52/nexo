@@ -1,11 +1,18 @@
+@model Product
+
 <form asp-action="AddProduct" asp-controller="Home" class="form">
   <div class="form-group">
     <label for="productName">Nome produto</label>
-    <input type="text" class="form-control"  placeholder="digite o produto" name="productName">
+    <input id="nameId" type="text" class="form-control"  placeholder="digite o produto" name="productName">
+    <span id="nameErrorId"  class="text-danger"></span>
   </div>
   <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="digite o preço" name="price">
+    <label  >Preço</label>
+    <input  type="text" class="form-control" id="precoId" placeholder="digite o preço" name="price">
+    <span id="priceErrorId"  class="text-danger"></span>
   </div>
-  <button type="submit" class="btn btn-primary">Adicionar Produto</button>
+  <button  id="aqui" type="submit" class="btn btn-primary">Adicionar Produto</button>
 </form>
+
+
+  <script src="~/js/site.js"></script>

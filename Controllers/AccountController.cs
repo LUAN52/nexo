@@ -36,14 +36,14 @@ namespace Nexo.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Register(string userName, string email, string password)
+        public async Task<IActionResult> Register(string name, string email, string password)
         {
             if (string.IsNullOrWhiteSpace(email))
             {
                 return RedirectToAction("Register", "Account");
             }
 
-            var client = new Client(userName);
+            var client = new Client(name);
             client.Email = email;
          
 
@@ -56,7 +56,7 @@ namespace Nexo.Controllers
             }
 
 
-            return RedirectToAction("Account", "Register");
+            return RedirectToAction("Register", "Account");
 
 
         }

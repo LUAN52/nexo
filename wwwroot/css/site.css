@@ -60,3 +60,8 @@ body {
 {
   display: inline;
 }
+
+.error
+{
+  display: none;
+}

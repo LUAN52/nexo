@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 
 namespace nexo.Models
@@ -17,13 +18,17 @@ namespace nexo.Models
             this.RegisterDate = DateTime.Now;
         }
 
-        public string LastName  { get; set; }
+        
 
         public List<Product> Products {get;set;}
 
         public DateTime RegisterDate{ get;  private set; }
 
         public  MasterStatus Status { get; set; }
+
+        [Required]
+        [RegularExpression(".+\\@.+\\..+",ErrorMessage = "Informe um email válido...")]
+        public  override string Email { get => base.Email; set => base.Email = value; }
 
     }
 }

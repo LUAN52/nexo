@@ -1,14 +1,14 @@
 @model Product
 
 
-<form asp-action="DeleteProduct" asp-controller="Home" class="form">
+<form asp-action="DeleteProd" asp-controller="Home" asp-route-id="@Model.id"class="form">
   <div class="form-group">
     <label for="productName">Nome produto</label>
     <input type="text" class="form-control"  placeholder="digite seu email" name="productName" value="@Model.Name" disabled>
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
-    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="preço" name="price" value="@Model.Price" disabled>
+    <input type="text" class="form-control"  placeholder="preço" name="price" value="@Model.Price" disabled>
   </div>
   <button type="submit" class="btn btn-primary">Apagar Produto</button>
   <a asp-action="ProductList" asp-controller="Home" class="btn btn-primary">Retornar para Lista</a>

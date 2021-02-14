@@ -12,31 +12,32 @@ using Microsoft.Extensions.Logging;
 using nexo.Models;
 using nexo.repository;
 using Nexo.data;
+using System.Text.RegularExpressions;
 
 namespace nexo.Controllers
 
-{   
+{
     [Authorize]
     public class HomeController : Controller
     {
 
-        
+
         private readonly AppDbContext _context;
 
         private readonly UserManager<Client> _userManager;
         private readonly ClientRepository _rClient;
         private readonly ProductRepository _rProduct;
 
-        public HomeController( ClientRepository rClient ,
+        public HomeController(ClientRepository rClient,
         ProductRepository rProduct,
          UserManager<Client> userManager,
          AppDbContext context)
         {
-            
-           _userManager = userManager;
+
+            _userManager = userManager;
             _rClient = rClient;
             _rProduct = rProduct;
-            _context=context;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -51,12 +52,12 @@ namespace nexo.Controllers
 
         [HttpGet]
         public IActionResult ProductList()
-        {   
+        {
             var id = _userManager.GetUserId(HttpContext.User);
             var listaProd = _rProduct.GetByIdClient(id);
-           
-            
-            
+
+
+
             return View(listaProd);
         }
 
@@ -69,10 +70,10 @@ namespace nexo.Controllers
         }
 
         [HttpGet]
-         public IActionResult MasterList()
+        public IActionResult MasterList()
         {
             var clientsM = _context.Users
-            .Where(p=>p.Status!=MasterStatus.noStatus)
+            .Where(p => p.Status != MasterStatus.noStatus)
             .ToList();
 
             return View(clientsM);
@@ -97,90 +98,102 @@ namespace nexo.Controllers
 
         public IActionResult UpdateProduct(int id)
         {
-            
 
-           var prod= _context.Products
-           .FirstOrDefault(p=>p.id==id);
-            
+
+            var prod = _context.Products
+            .FirstOrDefault(p => p.id == id);
+
             return View(prod);
-            
+
         }
-
-
-       
 
         [HttpGet]
         public IActionResult DeleteProduct(int id)
         {
-              var prod= _context.Products
-           .FirstOrDefault(p=>p.id==id);
+            var prod = _context.Products
+         .FirstOrDefault(p => p.id == id);
 
-           return View(prod);
+            return View(prod);
         }
 
         [HttpPost]
-          public IActionResult DeleteProd(string id)
+        public IActionResult DeleteProd(int id)
         {
-            var prod= _rProduct.GetById(id);
-                
-            if(prod!=null)
+            System.Console.WriteLine("valor do id" + id);
+            var prod = _rProduct.GetById(id.ToString());
+
+            if (prod != null)
             {
                 _rProduct.Delete(prod);
             }
 
-           return RedirectToAction("ProductList","Home");
+            return RedirectToAction("ProductList", "Home");
         }
 
         [HttpPost]
-        public IActionResult UpdateProduct(string productName,string price,int id)
+        public IActionResult UpdateProduct(string productName, string price, int id)
         {
             var idUser = _userManager.GetUserId(HttpContext.User);
 
-            var prod= _rProduct.GetOneProductByIdClient(id,idUser);
-          
-            var priceR = price.Replace(".",",");
+            var prod = _rProduct.GetOneProductByIdClient(id, idUser);
+
+            var priceR = price.Replace(".", ",");
             var priceD = double.Parse(priceR);
 
             prod.Name = productName;
             prod.Price = priceD;
-            
+
 
             _rProduct.Update(prod);
 
-            return RedirectToAction("ProductList","Home");
-
+            return RedirectToAction("ProductList", "Home");
 
         }
 
 
         [HttpPost]
-        public async  Task<IActionResult> AddProduct(string productName,string price)
-        {   
+        public async Task<IActionResult> AddProduct(string productName, string price)
+        {
 
-            var priceR = price.Replace(".",",");
-            var priceD = double.Parse(priceR);
+            string priceR;
+            double priceD;
             
-        
 
-            var id = _userManager.GetUserId(HttpContext.User);
-            var prod = new Product
+            System.Console.WriteLine(productName);
+            System.Console.WriteLine(price);
+            if ((productName != null && (price != null)))
             {
-                Name = productName,
-                Price = priceD,
-                Available =true,
-                Client_id = id
-                
-            };
 
-           var result = await _context.Products.AddAsync(prod);
+                System.Console.WriteLine(productName);
+                priceR = price.Replace(".", ",");
+                priceD = double.Parse(priceR);
 
-           if(result.State.ToString()=="Added")
-           {    
-               await _context.SaveChangesAsync();
-               return RedirectToAction("ProductList","Home");
-           }
 
-           return RedirectToAction("AddProduct","Home");
+                var id = _userManager.GetUserId(HttpContext.User);
+                var prod = new Product
+                {
+                    Name = productName,
+                    Price = priceD,
+                    Available = true,
+                    Client_id = id
+
+                };
+
+                var result = await _context.Products.AddAsync(prod);
+
+                if (result.State.ToString() == "Added")
+                {
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("ProductList", "Home");
+                }
+
+            }
+
+            return RedirectToAction("AddProduct", "Home");
         }
+
+
     }
 }
+
+

@@ -38,7 +38,8 @@ namespace nexo
             {opt.Password.RequireLowercase =false;
             opt.Password.RequiredLength = 6;
             opt.Password.RequireNonAlphanumeric = false;
-            opt.Password.RequireUppercase = false;}
+            opt.Password.RequireUppercase = false;
+            opt.Password.RequireDigit=false;}
 
             ).AddEntityFrameworkStores<AppDbContext>();
             

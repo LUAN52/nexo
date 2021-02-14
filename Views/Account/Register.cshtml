@@ -4,12 +4,18 @@
         <input type="text" class="form-control"  placeholder="digite seu email" name="name">
     </div>
     <div class="form-group">
-        <label for="exampleInputPassword1">Email</label>
-        <input type="email" class="form-control" id="exampleInputPassword1" placeholder="preço" name="email">
+        
+        <label for="email">Email</label>
+        <input type="text" class="form-control" id="emailId" placeholder="preço" name="email">
+         <span id="emailErrorId"  class="text-danger"></span>
     </div>
     <div class="form-group">
         <label for="exampleInputPassword1">Senha</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="preço" name="password">
+        <input type="password" class="form-control" id="passwordId" placeholder="senha" name="password">
+         <span id="passwordErrorId"  class="text-danger"></span>
     </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button id="registerId" type="submit" class="btn btn-primary">Resgistrar-se</button>
 </form>
+
+
+<script src="~/js/register.js"></script>
