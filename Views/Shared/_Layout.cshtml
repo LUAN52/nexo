@@ -18,6 +18,9 @@
     <div class="navbar-nav">
       <a class="nav-item nav-link" asp-action="AddProduct" asp-controller="home">Adicionar produto</a>
       <a class="nav-item nav-link" asp-action="ProductList" asp-controller="home">Listar Produto</a>
+       <a class="nav-item nav-link" asp-action="ClientList" asp-controller="home">Listar Clientes</a>
+       <a class="nav-item nav-link" asp-action="MasterList" asp-controller="home">Clientes Master</a>
+
     </div>
       <div class="navbar-nav">
       <a class="nav-item nav-link" asp-action="Login" asp-controller="Account">Login</a>
@@ -31,10 +34,8 @@
         
     </div>
 
-    <footer >
-        <div class="container">
-            &copy; 2021 - nexo - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
+    <footer class="foot" >
+        <span class="titleFooter"> feito por luan</span>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

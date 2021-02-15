@@ -45,10 +45,7 @@ namespace nexo.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+       
 
         [HttpGet]
         public IActionResult ProductList()
@@ -64,7 +61,7 @@ namespace nexo.Controllers
         [HttpGet]
         public IActionResult ClientList()
         {
-            var clients = _context.Users.ToList();
+            var clients = _rClient.GetAll();
 
             return View(clients);
         }
@@ -72,10 +69,8 @@ namespace nexo.Controllers
         [HttpGet]
         public IActionResult MasterList()
         {
-            var clientsM = _context.Users
-            .Where(p => p.Status != MasterStatus.noStatus)
-            .ToList();
-
+            
+            var clientsM = _rClient.Query(p=>p.Status!=MasterStatus.noStatus);
             return View(clientsM);
         }
 
@@ -100,8 +95,7 @@ namespace nexo.Controllers
         {
 
 
-            var prod = _context.Products
-            .FirstOrDefault(p => p.id == id);
+            var prod = _rProduct.GetById(id.ToString());
 
             return View(prod);
 
@@ -119,7 +113,7 @@ namespace nexo.Controllers
         [HttpPost]
         public IActionResult DeleteProd(int id)
         {
-            System.Console.WriteLine("valor do id" + id);
+            
             var prod = _rProduct.GetById(id.ToString());
 
             if (prod != null)
@@ -152,15 +146,13 @@ namespace nexo.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> AddProduct(string productName, string price)
+        public  IActionResult AddProduct(string productName, string price)
         {
 
             string priceR;
             double priceD;
             
 
-            System.Console.WriteLine(productName);
-            System.Console.WriteLine(price);
             if ((productName != null && (price != null)))
             {
 
@@ -179,13 +171,17 @@ namespace nexo.Controllers
 
                 };
 
-                var result = await _context.Products.AddAsync(prod);
+                var result = _rProduct.insert(prod);
 
-                if (result.State.ToString() == "Added")
+                if(result==0)
                 {
-                    await _context.SaveChangesAsync();
+                    throw new Exception("nao foi possivel adicionar");
+                }
+                else
+                {
                     return RedirectToAction("ProductList", "Home");
                 }
+
 
             }
 

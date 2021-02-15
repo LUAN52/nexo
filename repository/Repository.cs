@@ -12,11 +12,11 @@ namespace nexo.repository
 
         List<T> GetAll();
 
-        void Update(T entity);
+        int Update(T entity);
 
-       void Delete(T entity);
+       int Delete(T entity);
 
-       void insert(T entity);
+       int insert(T entity);
 
        List<T> Query(Expression<Func<T, bool>> filter);
 

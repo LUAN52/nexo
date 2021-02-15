@@ -17,19 +17,12 @@ namespace nexo.repository
 
         public AppDbContext Context { get; }
 
-        public void Delete(Client entity)
+        public int Delete(Client entity)
         {
              Context.Users.Remove(entity);
             var save =Context.SaveChanges();
 
-            if(save>0)
-            {
-                System.Console.WriteLine("salvou");
-            }
-            else
-            {
-                System.Console.WriteLine("nao salvou");
-            }
+            return save;
         }
 
         public List<Client> GetAll()
@@ -42,19 +35,12 @@ namespace nexo.repository
             return Context.Users.Where(i=>i.Id==id).FirstOrDefault();
         }
 
-        public void insert(Client entity)
+        public int insert(Client entity)
         {
             Context.Add(entity);
             var result = Context.SaveChanges();
 
-            if(result>0)
-            {
-                System.Console.WriteLine("inseriu com sucesso");
-            }
-            else
-            {
-                System.Console.WriteLine("nao inseriu");
-            }
+            return result;
 
         }
 
@@ -64,19 +50,12 @@ namespace nexo.repository
             return result.ToList();
         }
 
-        public void Update(Client entity)
+        public int Update(Client entity)
         {
             Context.Users.Update(entity);
            var result = Context.SaveChanges();
 
-            if(result>0)
-            {
-                System.Console.WriteLine("atualizou com exito");
-            }
-            else
-            {
-                System.Console.WriteLine("nao atualizou");
-            }
+            return result;
 
         }
 

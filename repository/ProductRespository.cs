@@ -18,19 +18,12 @@ namespace nexo.repository
 
         public AppDbContext Context { get; }
 
-        public void Delete(Product entity)
+        public int Delete(Product entity)
         {
              Context.Products.Remove(entity);
             var save =Context.SaveChanges();
 
-            if(save>0)
-            {
-                System.Console.WriteLine("salvou");
-            }
-            else
-            {
-                System.Console.WriteLine("nao salvou");
-            }
+           return save;
         }
 
         public List<Product> GetAll()
@@ -60,20 +53,12 @@ namespace nexo.repository
                    
 
         }
-        public void insert(Product entity)
+        public int insert(Product entity)
         {
              Context.Products.Add(entity);
            var result = Context.SaveChanges();
 
-            if(result>0)
-            {
-                System.Console.WriteLine("atualizou com exito");
-            }
-            else
-            {
-                System.Console.WriteLine("nao atualizou");
-            }
-
+           return result;
         }
 
         public List<Product> Query(Expression<Func<Product, bool>> filter)
@@ -82,19 +67,12 @@ namespace nexo.repository
             return result.ToList();
         }
 
-        public void Update(Product entity)
+        public int Update(Product entity)
         {
              Context.Products.Update(entity);
            var result = Context.SaveChanges();
 
-            if(result>0)
-            {
-                System.Console.WriteLine("atualizou com exito");
-            }
-            else
-            {
-                System.Console.WriteLine("nao atualizou");
-            }
+            return result;
         }
     }
 }
