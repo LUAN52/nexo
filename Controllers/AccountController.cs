@@ -1,8 +1,10 @@
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using nexo.Models;
 using Nexo.data;
@@ -30,7 +32,7 @@ namespace Nexo.Controllers
 
         [HttpGet]
         public IActionResult Register()
-        {
+        {  
             return View();
         }
 
@@ -38,25 +40,28 @@ namespace Nexo.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(string name, string email, string password)
         {
-            if (string.IsNullOrWhiteSpace(email))
-            {
+            if ((string.IsNullOrWhiteSpace(email)) ||(string.IsNullOrWhiteSpace(name)))
+            {   
+                System.Console.WriteLine("vazio");
                 return RedirectToAction("Register", "Account");
             }
+           
 
             var client = new Client(name);
             client.Email = email;
+            client.Status = MasterStatus.noStatus;
          
 
             var result = await this._user.CreateAsync(client, password);
 
             if (result.Succeeded)
             {
-                await this._signInManager.SignInAsync(client, false);
+              
                 return RedirectToAction("Login", "Account");
             }
 
 
-            return RedirectToAction("Register", "Account");
+            return RedirectToAction("Login", "Account");
 
 
         }
@@ -69,66 +74,24 @@ namespace Nexo.Controllers
             if (user != null)
             {
 
-                if (DateTime.Now.Year - user.RegisterDate.Year >= 5)
-                {
-                    user.Status = MasterStatus.silver;
-                    _context.Users.Update(user);
-                    _context.SaveChanges();
-                }
-
-                var quantProds = _context.Products
-                .Include(p => p.Client)
-                .Where(p => p.Client_id == user.Id)
-                .ToList()
-                .Count();
-
-
-                if (quantProds >= 2000)
-                {
-                    if ((quantProds >= 2000) && (quantProds < 5000))
-                    {
-                        user.Status = MasterStatus.gold;
-                        _context.Users.Update(user);
-                        _context.SaveChanges();
-                    }
-                    else
-                    {
-                        if ((quantProds >= 5000) && (quantProds < 10000))
-                        {
-                            user.Status = MasterStatus.platina;
-                            _context.Users.Update(user);
-                            _context.SaveChanges();
-                        }
-                        else
-                        {
-                            if (quantProds >= 10000)
-                            {
-                                user.Status = MasterStatus.diamond;
-                                _context.Users.Update(user);
-                                _context.SaveChanges();
-                            }
-
-                        }
-                    }
-                }
-                else
-                {
-                    user.Status = MasterStatus.noStatus;
-                    _context.Users.Update(user);
-                    _context.SaveChanges();
-                }
-
-
                 var result = await this._signInManager.PasswordSignInAsync(user, password, false, false);
 
-                if ((result.Succeeded) || (User.Identity.IsAuthenticated))
-                {
-                    return RedirectToAction("ProductList", "Home");
+                if (result.Succeeded) 
+                {    await this._signInManager.SignInAsync(user, false);
+                    return RedirectToAction("ClientDetail", "Home");
                 }
 
             }
 
             return RedirectToAction("Login", "Account");
+        }
+
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+
+            return RedirectToAction("Login","Account");
         }
     }
 }

@@ -11,14 +11,17 @@
             <label for="exampleInputPassword1">Senha</label>
             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="digite sua senha" name="password">
         </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">login</button>
+     <a class="btn btn-primary" asp-action="Register" asp-controller="Account" >Cadastrar-se</a>
     </form>
+    
+   
 
 }
 else
 {   
     
-        <a  class="btn btn-primary logLink" asp-action="ProductList" asp-controller="Home">Voltar para lista</a>
+    <a  class="btn btn-primary logLink" asp-action="ProductList" asp-controller="Home">Voltar para lista</a>
     
 }
 

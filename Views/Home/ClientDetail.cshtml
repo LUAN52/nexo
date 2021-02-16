@@ -1,0 +1,36 @@
+@model Client
+
+<div class="contaier-fluid">
+    <h1>Detalhe do cliente</h1>
+
+    <div class="containerDetail">
+        <h4>Nome:</h4>
+        <span>
+            @Model.UserName
+        </span>
+    </div>
+
+    <div class="containerDetail">
+        <h4>Data de cadastro:</h4>
+        <span>
+            @Model.RegisterDate.Date.ToString("dd/MM/yyyy")
+        </span>
+    </div>
+
+    <div class="containerDetail">
+        <h4>Email:</h4>
+        <span>
+            @Model.Email
+        </span>
+
+        if(Model.Status!=MasterStatus.noStatus)
+        {
+        <div class="containerDetail">
+            <h4>Email:</h4>
+            <span>
+                @Model.Status
+            </span>
+            }
+        </div>
+
+    </div>

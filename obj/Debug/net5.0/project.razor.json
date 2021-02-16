@@ -15653,6 +15653,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\Luan Figueiredo\\Desktop\\repositorios\\nexo\\nexo\\Views\\Home\\GetProduct.cshtml",
+      "TargetPath": "Views\\Home\\GetProduct.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\Luan Figueiredo\\Desktop\\repositorios\\nexo\\nexo\\Views\\Home\\UpdateProduct.cshtml",
       "TargetPath": "Views\\Home\\UpdateProduct.cshtml",
       "FileKind": "mvc"
@@ -15660,6 +15665,16 @@
     {
       "FilePath": "c:\\Users\\Luan Figueiredo\\Desktop\\repositorios\\nexo\\nexo\\Views\\_ViewStart.cshtml",
       "TargetPath": "Views\\_ViewStart.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\Luan Figueiredo\\Desktop\\repositorios\\nexo\\nexo\\Views\\Home\\GetProductByName.cshtml",
+      "TargetPath": "Views\\Home\\GetProductByName.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\Luan Figueiredo\\Desktop\\repositorios\\nexo\\nexo\\Views\\Home\\ClientDetail.cshtml",
+      "TargetPath": "Views\\Home\\ClientDetail.cshtml",
       "FileKind": "mvc"
     },
     {

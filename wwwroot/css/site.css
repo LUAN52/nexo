@@ -95,3 +95,18 @@ body {
   padding: 15px;
   
 }
+
+.containerDetail
+{
+  border: 2px solid black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
+.containerDetail > span
+{
+  font-size: 20px;
+}
+

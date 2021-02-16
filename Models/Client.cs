@@ -15,7 +15,7 @@ namespace nexo.Models
         public Client(string userName) : base(userName)
         {
             this.Products = new List<Product>();
-            this.RegisterDate = DateTime.Now;
+            this.RegisterDate = DateTime.Today;
         }
 
         

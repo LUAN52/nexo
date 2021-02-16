@@ -1,4 +1,4 @@
-<form asp-action="Register" asp-controller="Account" class="form">
+<form asp-action="Register" asp-controller="Account" class="form" method="POST">
     <div class="form-group">
         <label for="productName">Nome</label>
         <input type="text" class="form-control"  placeholder="digite seu email" name="name">
@@ -6,7 +6,7 @@
     <div class="form-group">
         
         <label for="email">Email</label>
-        <input type="text" class="form-control" id="emailId" placeholder="preço" name="email">
+        <input type="text" class="form-control" id="emailId" placeholder="email" name="email">
          <span id="emailErrorId"  class="text-danger"></span>
     </div>
     <div class="form-group">

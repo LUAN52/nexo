@@ -88,3 +88,6 @@ C:\Users\Luan Figueiredo\Desktop\repositorios\nexo\nexo\obj\Debug\net5.0\nexo.dl
 C:\Users\Luan Figueiredo\Desktop\repositorios\nexo\nexo\obj\Debug\net5.0\ref\nexo.dll
 C:\Users\Luan Figueiredo\Desktop\repositorios\nexo\nexo\obj\Debug\net5.0\nexo.pdb
 C:\Users\Luan Figueiredo\Desktop\repositorios\nexo\nexo\obj\Debug\net5.0\nexo.genruntimeconfig.cache
+C:\Users\Luan Figueiredo\Desktop\repositorios\nexo\nexo\obj\Debug\net5.0\Razor\Views\Home\ClientDetail.cshtml.g.cs
+C:\Users\Luan Figueiredo\Desktop\repositorios\nexo\nexo\obj\Debug\net5.0\Razor\Views\Home\GetProductByName.cshtml.g.cs
+C:\Users\Luan Figueiredo\Desktop\repositorios\nexo\nexo\obj\Debug\net5.0\Razor\Views\Home\GetProduct.cshtml.g.cs

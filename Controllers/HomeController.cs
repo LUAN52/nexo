@@ -171,21 +171,78 @@ namespace nexo.Controllers
 
                 };
 
-                var result = _rProduct.insert(prod);
+                _rProduct.insert(prod);
+                var user = _rClient.GetById(id);
 
-                if(result==0)
+                if (DateTime.Now.Year - user.RegisterDate.Year >= 5)
                 {
-                    throw new Exception("nao foi possivel adicionar");
+                    user.Status = MasterStatus.silver;
+                   _rClient.Update(user);
                 }
-                else
+
+                var quantProds = _rProduct.GetByIdClient(id);
+                
+                if(quantProds.Count >= 2000)
                 {
+                    if ((quantProds.Count >= 2000) && (quantProds.Count < 5000))
+                    {
+                        user.Status = MasterStatus.gold;
+                        _rClient.Update(user);
+                    }
+                    else
+                    {
+                        if ((quantProds.Count >= 5000) && (quantProds.Count < 10000))
+                        {
+                            user.Status = MasterStatus.platina;
+                           _rClient.Update(user);
+                        }
+                        else
+                        {
+                            if (quantProds.Count >= 10000)
+                            {
+                                user.Status = MasterStatus.diamond;
+                                _rClient.Update(user);
+                            }
+
+                        }
+                    }
+                }
+               
                     return RedirectToAction("ProductList", "Home");
-                }
-
+                
 
             }
 
             return RedirectToAction("AddProduct", "Home");
+        }
+
+
+        public IActionResult ClientDetail()
+        {
+              var id = _userManager.GetUserId(HttpContext.User);
+              var user = _rClient.GetById(id);
+
+              return View(user);
+        }
+
+
+        [HttpGet]
+        public IActionResult GetProductByName(string productName)
+        {
+            var prod = _rProduct.Query(y=>y.Name==productName).FirstOrDefault();
+            if(prod!=null)
+            {
+                  return View(prod);
+            }
+
+            return RedirectToAction("GetProduct","Home");
+          
+
+        }
+
+        public IActionResult GetProduct()
+        {
+            return View();
         }
 
 
