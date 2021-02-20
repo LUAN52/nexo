@@ -1,6 +1,6 @@
 @model Client
 
-<div class="contaier-fluid">
+<div class="clientDetail">
     <h1>Detalhe do cliente</h1>
 
     <div class="containerDetail">
@@ -23,14 +23,14 @@
             @Model.Email
         </span>
 
-        if(Model.Status!=MasterStatus.noStatus)
+       @if(Model.Status!=MasterStatus.noStatus)
         {
         <div class="containerDetail">
-            <h4>Email:</h4>
+            <h4>status:</h4>
             <span>
                 @Model.Status
             </span>
-            }
+            
         </div>
-
+        }
     </div>

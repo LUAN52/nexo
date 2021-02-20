@@ -90,7 +90,6 @@ namespace nexo.Controllers
 
 
         [HttpGet]
-
         public IActionResult UpdateProduct(int id)
         {
 
@@ -126,8 +125,10 @@ namespace nexo.Controllers
 
         [HttpPost]
         public IActionResult UpdateProduct(string productName, string price, int id)
-        {
+        {   System.Console.WriteLine(id);
+           
             var idUser = _userManager.GetUserId(HttpContext.User);
+           
 
             var prod = _rProduct.GetOneProductByIdClient(id, idUser);
 

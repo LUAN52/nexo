@@ -2,7 +2,7 @@
 @model Product
 
 
-<form asp-action="UpdateProduct" asp-controller="Home" asp-route-id="@Model.id" class="form">
+<form asp-action="UpdateProduct" asp-controller="Home"  class="form">
   <div class="form-group">
     <label for="productName">Nome produto</label>
     <input type="text" class="form-control"  placeholder="digite o nome produto" name="productName" value="@Model.Name">
@@ -10,6 +10,9 @@
   <div class="form-group">
     <label for="exampleInputPassword1">Preço</label>
     <input type="text" class="form-control"  placeholder="preço" name="price" value="@Model.Price">
+    <div class="form-group">
+    <input type="hidden" class="form-control"  placeholder="preço" name="id" value="@Model.id">
+  </div>
   </div>
   <button type="submit" class="btn btn-primary">Atualizar Produto</button>
 </form>

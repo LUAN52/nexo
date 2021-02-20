@@ -5656,11 +5656,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\Luan Figueiredo\\Desktop\\repositorios\\nexo\\nexo\\nexo.csproj",
+      "projectUniqueName": "C:\\Users\\Luan Figueiredo\\Desktop\\repositorios\\nexo\\nexo\\nexo.csproj",
       "projectName": "nexo",
-      "projectPath": "c:\\Users\\Luan Figueiredo\\Desktop\\repositorios\\nexo\\nexo\\nexo.csproj",
+      "projectPath": "C:\\Users\\Luan Figueiredo\\Desktop\\repositorios\\nexo\\nexo\\nexo.csproj",
       "packagesPath": "C:\\Users\\Luan Figueiredo\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\Luan Figueiredo\\Desktop\\repositorios\\nexo\\nexo\\obj\\",
+      "outputPath": "C:\\Users\\Luan Figueiredo\\Desktop\\repositorios\\nexo\\nexo\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
