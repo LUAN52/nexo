@@ -19,7 +19,7 @@
         <td>@item.Name</td>
         <td>@item.Price</td>
         <td><a asp-action="UpdateProduct" asp-controller="Home" asp-route-id="@item.id">atualizar</a></td>
-        <td><a asp-action="DeleteProduct" asp-controller="Home">deletar</a></td>
+        <td><a asp-action="DeleteProduct" asp-controller="Home" asp-route-id="@item.id">deletar</a></td>
       </tr>
     }
 
