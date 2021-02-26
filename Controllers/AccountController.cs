@@ -52,8 +52,6 @@ namespace Nexo.Controllers
                 return false;
             }
 
-
-
             var client = new Client(name);
             client.Email = email;
             client.Status = MasterStatus.noStatus;

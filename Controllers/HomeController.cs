@@ -53,8 +53,6 @@ namespace nexo.Controllers
             var id = _userManager.GetUserId(HttpContext.User);
             var listaProd = _rProduct.GetByIdClient(id);
 
-
-
             return View(listaProd);
         }
 
@@ -104,7 +102,7 @@ namespace nexo.Controllers
         public IActionResult DeleteProduct(int id)
         {
             var prod = _context.Products
-         .FirstOrDefault(p => p.id == id);
+            .FirstOrDefault(p => p.id == id);
 
             return View(prod);
         }
