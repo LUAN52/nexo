@@ -86,7 +86,7 @@ namespace Nexo.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(string userName, string password)
+        public async Task<bool> Login(string userName, string password)
         {
             var user = await this._user.FindByNameAsync(userName);
             if (user != null)
@@ -97,12 +97,15 @@ namespace Nexo.Controllers
                 if (result.Succeeded)
                 {
                     await this._signInManager.SignInAsync(user, false);
-                    return RedirectToAction("ClientDetail", "Home");
+                    return true;
                 }
-
+                else
+                {
+                    return false;
+                }
             }
 
-            return RedirectToAction("Login", "Account");
+            return false;
         }
 
 
